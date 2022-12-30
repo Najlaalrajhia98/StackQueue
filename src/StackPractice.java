@@ -38,7 +38,7 @@ OUTPUT: true (Meaning valid)
      * @param  this class works for all the above cases.
      */
     public static void main(String[] args) {
-        String mString="([arr{(10)}])";
+        String mString="{ int x= (int)(0+1); int[] arr=new arr[10];;; }";
         Stack<Character> myStack = new Stack<>();
         System.out.println(stack1(mString, myStack));
     }
@@ -52,12 +52,13 @@ OUTPUT: true (Meaning valid)
                 myStack.push(mString.charAt(i));
             else if (mString.charAt(i)=='}'|| mString.charAt(i)==']' || mString.charAt(i)==')') 
             {
-                if (!myStack.empty() && mString.charAt(i)=='}'&& myStack.peek()=='{' || 
-                        mString.charAt(i)==']'&& myStack.peek()=='[' || 
-                        mString.charAt(i)==')'&& myStack.peek()=='(' )
+                if (!myStack.empty()  && mString.charAt(i)=='}'&& myStack.contains('{') || !myStack.empty()&&
+                        mString.charAt(i)==']'&& myStack.contains('[') || !myStack.empty()&&
+                        mString.charAt(i)==')'&& myStack.contains('(') )
                     myStack.pop();
-                else 
+                else {
                     return false;
+            }
             }
         }
         if (myStack.empty()) 
